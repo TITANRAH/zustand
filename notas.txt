@@ -1,0 +1,15 @@
+git remote set-url origin <nueva-url>
+Verifica que el cambio se realizó correctamente. Puedes usar el siguiente comando para verificar que la URL remota se ha actualizado correctamente:
+
+bash
+Copy code
+git remote -v
+Esto mostrará las URL remotas asociadas con tu repositorio.
+
+Sube tus cambios al nuevo repositorio remoto. Utiliza los comandos git add, git commit y git push para subir tus cambios al nuevo repositorio:
+
+bash
+Copy code
+git add .
+git commit -m "Mover repositorio a mi propio repo"
+git push origin <branch>
