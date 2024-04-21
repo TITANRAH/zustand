@@ -8,3 +8,18 @@ git push origin <branch>
 documentacion de zustand 
 
 https://docs.pmnd.rs/zustand/getting-started/introduction
+
+
+en firebase puedo crear real data time me da una url qe puedo copiar en postman 
+
+https://eighth-cacao-325701-default-rtdb.firebaseio.com/
+
+puedo escribir objetos llave valor
+
+hola: mundo
+
+pongo en postman la url mas hola.json y me devuelve mundo 
+
+https://eighth-cacao-325701-default-rtdb.firebaseio.com/hola.json
+
+r: mundo

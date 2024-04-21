@@ -73,10 +73,18 @@ function BearsDisplay() {
   // si cambio algo si renderizara
   const bears = useBearStore(useShallow((state) => state.bears));
   const doNothing = useBearStore((state) => state.doNothing);
+  const addBear = useBearStore((state) => state.addBear);
+  const clearBear = useBearStore((state) => state.clearBear);
   return (
-    <WhiteCard>
+    <WhiteCard >
       <h1>Osos</h1>
+
+      <div className="flex flex-col gap-y-2 mt-3">
+
       <button onClick={doNothing}>Do Nothing</button>
+      <button onClick={addBear}>Add Bears</button>
+      <button onClick={clearBear}>Clear Bears</button>
+      </div>
 
       <pre>{JSON.stringify(bears, null, 2)}</pre>
     </WhiteCard>
