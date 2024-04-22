@@ -1,7 +1,7 @@
 import { StateCreator, create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 // import { customSessionStorage } from "../storages/session.storage";
-import { firebaseStorage } from "../storages/firebase.storage";
+// import { firebaseStorage } from "../storages/firebase.storage";
 
 interface PersonState {
   firstName: string;
@@ -14,13 +14,16 @@ interface Actions {
   setFirstName: (value: string) => void;
   setLastName: (value: string) => void;
 }
-
-const storeAPI: StateCreator<PersonState & Actions> = (set) => ({
+// [["zustand/devtools", never]] esto es el tipado para evitar que poner los nombres a los estados 
+// de problemas
+const storeAPI: StateCreator<PersonState & Actions, [["zustand/devtools", never]]> = (set) => ({
   firstName: "",
   lastName: "",
 
-  setFirstName: (value: string) => set((state) => ({ firstName: value })),
-  setLastName: (value: string) => set((state) => ({ lastName: value })),
+  // pongo false para para evitar que reemplace el estado anterior pero mas para poder poner nombre 
+  // al estado y asi verlo en las devtools
+  setFirstName: (value: string) => set(({ firstName: value }), false, 'setFirstName'),
+  setLastName: (value: string) => set(({ lastName: value }), false, 'setLasttName'),
 });
 
 export const userPersonStore = create<PersonState & Actions>()(
@@ -32,7 +35,7 @@ export const userPersonStore = create<PersonState & Actions>()(
       {
         name: "person-storage",
         //   trasladmos el archivo de session storage y lo llamamos aca
-        storage: firebaseStorage,
+        // storage: firebaseStorage,
       }
     )
   )

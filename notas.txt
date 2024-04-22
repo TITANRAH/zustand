@@ -23,3 +23,9 @@ pongo en postman la url mas hola.json y me devuelve mundo
 https://eighth-cacao-325701-default-rtdb.firebaseio.com/hola.json
 
 r: mundo
+
+
+
+immer middleware 
+
+https://docs.pmnd.rs/zustand/guides/typescript#common-recipes
