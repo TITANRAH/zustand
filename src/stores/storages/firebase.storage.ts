@@ -1,7 +1,7 @@
 import { StateStorage, createJSONStorage } from "zustand/middleware";
 
 const firebaseUrl =
-  "https://eighth-cacao-325701-default-rtdb.firebaseio.com/zustand";
+  "https://eighth-cacao-325701-default-rtdb.firebaseio.com/4";
 
 //   control punto y me trae todas las propiedades que faltan
 const storageAPI: StateStorage = {

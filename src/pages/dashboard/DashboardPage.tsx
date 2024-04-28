@@ -6,11 +6,16 @@ import {
   IoPawOutline,
 } from "react-icons/io5";
 import { WhiteCard } from "../../components";
-import { useBearStore, userPersonStore } from "../../stores";
+import { useBearStore, useTaskStore, userPersonStore } from "../../stores";
 
 export const Dashboard = () => {
   const totalBears = useBearStore((state) => state.computed!.totalBears);
-  const firstName = userPersonStore((state) => state.firstName)
+  const firstName = userPersonStore((state) => state.firstName);
+  const tasks = useTaskStore((state) => state.tasks);
+
+  // como es un record <llave: valor> los pasamos a object.keys
+  const taskCount = Object.keys(tasks!).length;
+
   return (
     <>
       <h1>Dashboard</h1>
@@ -33,7 +38,7 @@ export const Dashboard = () => {
         <WhiteCard centered>
           <IoListOutline size={50} className="text-indigo-600" />
           <h2>Tareas</h2>
-          <p>Información</p>
+          <p>{taskCount}</p>
         </WhiteCard>
 
         <WhiteCard centered>
@@ -51,3 +56,6 @@ export const Dashboard = () => {
     </>
   );
 };
+function userTaskStore(arg0: (state: any) => any) {
+  throw new Error("Function not implemented.");
+}
