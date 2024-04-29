@@ -1,17 +1,33 @@
+import { FormEvent } from "react";
 import { WhiteCard } from "../../components";
 import { useWiddingBoundStore } from "../../stores/wedding";
 
 export const WeddingInvitationPage = () => {
+  
   const firstName = useWiddingBoundStore((state) => state.firstName);
   const lastName = useWiddingBoundStore((state) => state.lastName);
   const setFirstName = useWiddingBoundStore((state) => state.setFirstName);
   const setLastName = useWiddingBoundStore((state) => state.setLastName);
 
-  const guestCount = useWiddingBoundStore(state => state.guestCount)
-  const setGuestCount = useWiddingBoundStore(state => state.setGuestCount)
+  const guestCount = useWiddingBoundStore((state) => state.guestCount);
+  const setGuestCount = useWiddingBoundStore((state) => state.setGuestCount);
 
-  const eventMMMMYYYY = useWiddingBoundStore(state => state.eventYYYYMMDD())
-  const eventHHMM = useWiddingBoundStore(state => state.eventHHMM())
+  const eventYYYYMMDD = useWiddingBoundStore((state) => state.eventYYYYMMDD());
+  const eventHHMM = useWiddingBoundStore((state) => state.eventHHMM());
+  const setEventDate = useWiddingBoundStore((state) => state.setEventDate);
+  const setEventTime = useWiddingBoundStore((state) => state.setEventTime);
+
+  const isConfirmed = useWiddingBoundStore((state) => state.isConfirmed);
+  const setIsConfirmed = useWiddingBoundStore((state) => state.setIsConfirmed);
+  const eventDate = useWiddingBoundStore((state) => state.eventDate);
+
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log({firstName, lastName, guestCount, eventDate, isConfirmed});
+    
+  }
   return (
     <>
       <h1>Invitación de Boda</h1>
@@ -20,7 +36,7 @@ export const WeddingInvitationPage = () => {
 
       <WhiteCard className="flex items-center justify-center p-12">
         <div className="mx-auto w-full max-w-[550px]">
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="-mx-3 flex flex-wrap">
               <div className="w-full px-3 sm:w-1/2">
                 <div className="mb-5">
@@ -77,7 +93,13 @@ export const WeddingInvitationPage = () => {
                   <label className="mb-3 block text-base font-medium text-[#07074D]">
                     Fecha de evento
                   </label>
-                  <input type="date" name="eventDate" id="eventDate" value={eventMMMMYYYY}/>
+                  <input
+                    type="date"
+                    name="eventDate"
+                    id="eventDate"
+                    value={eventYYYYMMDD}
+                    onChange={(e) => setEventDate(e.target.value)}
+                  />
                 </div>
               </div>
               <div className="w-full px-3 sm:w-1/2">
@@ -85,7 +107,13 @@ export const WeddingInvitationPage = () => {
                   <label className="mb-3 block text-base font-medium text-[#07074D]">
                     Hora del evento
                   </label>
-                  <input type="time" name="eventTime" id="eventTime" value={eventHHMM}/>
+                  <input
+                    type="time"
+                    name="eventTime"
+                    id="eventTime"
+                    value={eventHHMM}
+                    onChange={(e) => setEventTime(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
@@ -101,6 +129,8 @@ export const WeddingInvitationPage = () => {
                     name="isComing"
                     id="radioButton1"
                     className="h-5 w-5"
+                    checked={isConfirmed}
+                    onChange={() => setIsConfirmed(true)}
                   />
                   <label className="pl-3 text-base font-medium text-[#07074D]">
                     Si
@@ -112,6 +142,8 @@ export const WeddingInvitationPage = () => {
                     name="isComing"
                     id="radioButton2"
                     className="h-5 w-5"
+                    checked={!isConfirmed}
+                    onChange={() => setIsConfirmed(false)}
                   />
                   <label className="pl-3 text-base font-medium text-[#07074D]">
                     No
@@ -121,7 +153,7 @@ export const WeddingInvitationPage = () => {
             </div>
 
             <div>
-              <button>Enviar</button>
+              <button type="submit">Enviar</button>
             </div>
           </form>
         </div>
