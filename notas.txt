@@ -41,3 +41,16 @@ para alert
  para mutacion de estado (opcional sin middlewares) 
 
  npm i immer
+
+
+instalar docker en el equipo
+
+usar esta documentacion de un backend ejemplo
+
+https://hub.docker.com/r/klerith/teslo-shop-cors
+
+crear archivo dockker.yaml y copiar la info 
+
+correr docker y la instancia con:
+
+docker compose up -d
