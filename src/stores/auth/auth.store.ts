@@ -9,6 +9,8 @@ export interface AuthState {
   user?: User;
 
   loginUser: (email: string, password: string) => Promise<void>;
+  checkAuthStatus: () => Promise<void>;
+  logoutUser: () => void;
 }
 
 const storeApi: StateCreator<AuthState> = (set) => ({
@@ -24,7 +26,21 @@ const storeApi: StateCreator<AuthState> = (set) => ({
       console.log("cayo en el catch ", error);
 
       set({ status: "unauthorized", token: undefined, user: undefined });
+      throw "Unauthorized";
     }
+  },
+
+  checkAuthStatus: async () => {
+    try {
+      const { token, ...user } = await AuthService.checkStatus();
+      set({ status: "authorized", token, user });
+    } catch (error) {
+      set({ status: "unauthorized", token: undefined, user: undefined });
+    }
+  },
+
+  logoutUser: () => {
+    set({ status: "unauthorized", token: undefined, user: undefined });
   },
 });
 

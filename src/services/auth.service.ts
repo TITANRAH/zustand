@@ -40,7 +40,7 @@ export class AuthService {
 
   static checkStatus = async (): Promise<LoginResponse> => {
     try {
-      const {data,} = await tesloApi.get("/auth/check-status");
+      const {data} = await tesloApi.get("/auth/check-status");
 
       return data
     } catch (error) {

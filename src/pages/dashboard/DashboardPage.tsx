@@ -1,17 +1,20 @@
 import {
   IoAccessibilityOutline,
   IoHeartOutline,
+  IoInformationOutline,
   IoListOutline,
   IoLockClosedOutline,
   IoPawOutline,
 } from "react-icons/io5";
 import { WhiteCard } from "../../components";
-import { useBearStore, useTaskStore, userPersonStore } from "../../stores";
+import { useAuthStore, useBearStore, useTaskStore, userPersonStore } from "../../stores";
+import RequestInfo from "../../components/shared/request-info/RequestInfo";
 
 export const Dashboard = () => {
   const totalBears = useBearStore((state) => state.computed!.totalBears);
   const firstName = userPersonStore((state) => state.firstName);
   const tasks = useTaskStore((state) => state.tasks);
+  const userName = useAuthStore((state) => state.user?.fullName ?? 'No user');
 
   // como es un record <llave: valor> los pasamos a object.keys
   const taskCount = Object.keys(tasks!).length;
@@ -50,12 +53,15 @@ export const Dashboard = () => {
         <WhiteCard centered>
           <IoLockClosedOutline size={50} className="text-indigo-600" />
           <h2>Auth</h2>
-          <p>Información</p>
+          <p>{userName}</p>
+        </WhiteCard>
+
+        <WhiteCard centered>
+          <IoInformationOutline size={50} className="text-indigo-600" />
+          <RequestInfo/>
         </WhiteCard>
       </div>
     </>
   );
 };
-function userTaskStore(arg0: (state: any) => any) {
-  throw new Error("Function not implemented.");
-}
+
